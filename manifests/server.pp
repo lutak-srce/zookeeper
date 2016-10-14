@@ -11,7 +11,6 @@ class zookeeper::server (
   $file_mode           = $::zookeeper::params::file_mode,
   $file_owner          = $::zookeeper::params::file_owner,
   $file_group          = $::zookeeper::params::file_group,
-  $myid                = undef,
   $confdir             = $::zookeeper::params::confdir,
   $confdir_altname     = $::zookeeper::params::confdir_altname,
   $confdir_altlink     = $::zookeeper::params::confdir_altlink,
@@ -23,8 +22,8 @@ class zookeeper::server (
   $source_log4j        = 'puppet:///modules/zookeeper/log4j.properties',
   $source_configxsl    = 'puppet:///modules/zookeeper/configuration.xsl',
   $template_myid       = 'zookeeper/myid.erb',
-  $nodes               = [],
   $myid                = undef,
+  $nodes               = [],
   $noops               = undef,
 ) inherits zookeeper::params {
 
