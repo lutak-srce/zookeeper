@@ -19,7 +19,7 @@ class zookeeper::params {
 
   # module specific settings (server)
   $service_ensure = 'running'
-  $service_enable = 'true'
+  $service_enable = true
 
   # install package depending on major version
   case $::osfamily {

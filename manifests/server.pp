@@ -34,8 +34,8 @@ class zookeeper::server (
   validate_string($package)
   validate_string($version)
   validate_string($service)
-  validate_re($service_ensure, ['running','stopped','undef'], 'Valid values are: running, stopped')
-  validate_re($service_enable, ['true','false','undef'], 'Valid values are: true, false')
+  validate_re($service_ensure, ['running','stopped',undef], 'Valid values are: running, stopped')
+  validate_re($service_enable, [true,false,undef], 'Valid values are: true, false')
 
   ### Internal variables (that map class parameters)
   if $ensure == 'present' {
@@ -115,9 +115,9 @@ class zookeeper::server (
     content => template($template_myid),
   }
   file { '/var/lib/zookeeper/myid':
-    ensure  => symlink,
-    path    => "${datadir}/myid",
-    target  => "${confdir}/myid",
+    ensure => symlink,
+    path   => "${datadir}/myid",
+    target => "${confdir}/myid",
   }
 
   # service
