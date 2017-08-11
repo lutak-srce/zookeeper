@@ -17,10 +17,6 @@ class zookeeper::params {
   $dependency_class = undef
   $my_class         = undef
 
-  # module specific settings (server)
-  $service_ensure = 'running'
-  $service_enable = true
-
   # install package depending on major version
   case $::osfamily {
     default: {
