@@ -73,6 +73,12 @@ class zookeeper::server (
     require => Package['zookeeper-server'],
   }
 
+  file { 'zookeeper_data_dir' :
+    ensure  => directory,
+    path    => $datadir,
+    require => Package['zookeeper-server'],
+  }
+
   # if we manage alternatives, then set up symlink
   if ( $manage_alternatives ) {
     alternative_entry { $confdir :
