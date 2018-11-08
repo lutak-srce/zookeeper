@@ -73,10 +73,16 @@ class zookeeper::server (
 
   file { 'zookeeper_data_dir' :
     ensure  => directory,
+    path    => $datadir,
+    require => Package['zookeeper-server'],
+  }
+
+  file { 'zookeeper_data_dir_data' :
+    ensure  => directory,
     owner   => 'zookeeper',
     group   => 'zookeeper',
     mode    => '0750',
-    path    => $datadir,
+    path    => "${datadir}/data",
     require => Package['zookeeper-server'],
   }
 
@@ -132,7 +138,7 @@ class zookeeper::server (
   }
   file { '/var/lib/zookeeper/myid':
     ensure => symlink,
-    path   => "${datadir}/myid",
+    path   => "${datadir}/data/myid",
     target => "${confdir}/myid",
   }
 
