@@ -73,7 +73,17 @@ class zookeeper::server (
 
   file { 'zookeeper_data_dir' :
     ensure  => directory,
+    owner   => 'zookeeper',
+    group   => 'zookeeper',
     path    => $datadir,
+    require => Package['zookeeper-server'],
+  }
+
+  file { 'zookeeper_data_log_dir' :
+    ensure  => directory,
+    owner   => 'zookeeper',
+    group   => 'zookeeper',
+    path    => $datalogdir,
     require => Package['zookeeper-server'],
   }
 
