@@ -30,7 +30,7 @@ class zookeeper (
   if $my_class         { include $my_class         }
 
   ### Code
-  package { 'zookeeper':
+  package { 'zookeeper-client':
     ensure => $package_ensure,
     name   => $package,
     noop   => $noops,
