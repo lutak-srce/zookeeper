@@ -27,8 +27,6 @@ class zookeeper::server (
   $noops               = undef,
 ) inherits zookeeper::params {
 
-  include ::zookeeper
-
   ### Input parameters validation
   validate_re($ensure, ['present','absent'], 'Valid values are: present, absent')
   validate_string($package)
