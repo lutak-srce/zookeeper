@@ -75,6 +75,7 @@ class zookeeper::server (
     ensure  => directory,
     owner   => 'zookeeper',
     group   => 'zookeeper',
+    mode    => '0750',
     path    => $datadir,
     require => Package['zookeeper-server'],
   }
@@ -83,6 +84,7 @@ class zookeeper::server (
     ensure  => directory,
     owner   => 'zookeeper',
     group   => 'zookeeper',
+    mode    => '0750',
     path    => $datalogdir,
     require => Package['zookeeper-server'],
   }
