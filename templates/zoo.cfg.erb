@@ -68,7 +68,7 @@ autopurge.snapRetainCount = <%= @snap_retain_count %>
 
 # Time interval in hours for which the purge task has to be triggered
 # (default is 0 - disabled)
-#<% if @purge_interval -%>
+<% if @purge_interval -%>
 autopurge.purgeInterval = <%= @purge_interval %>
 <% else -%>
 #autopurge.purgeInterval = 1
