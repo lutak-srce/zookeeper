@@ -16,6 +16,8 @@ class zookeeper::server (
   $confdir_altlink     = $::zookeeper::params::confdir_altlink,
   $datadir             = $::zookeeper::params::datadir,
   $datalogdir          = $::zookeeper::params::datalogdir,
+  $snap_retain_count   = undef,
+  $purge_interval      = undef,
   $manage_alternatives = $::zookeeper::params::manage_alternatives,
   $template_zoocfg     = 'zookeeper/zoo.cfg.erb',
   $source_environment  = 'puppet:///modules/zookeeper/environment',

@@ -58,3 +58,18 @@ server.<%= num %>=<%= node %>
 # on coordination.
 #leaderServes=yes
 
+# Retains the number of most recent snapshots and the corresponding transaction
+# logs (default is 3)
+<% if @snap_retain_count -%>
+autopurge.snapRetainCount = <%= @snap_retain_count %>
+<% else -%>
+#autopurge.snapRetainCount = 3
+<% end -%>
+
+# Time interval in hours for which the purge task has to be triggered
+# (default is 0 - disabled)
+#<% if @purge_interval -%>
+autopurge.purgeInterval = <%= @purge_interval %>
+<% else -%>
+#autopurge.purgeInterval = 1
+<% end -%>
