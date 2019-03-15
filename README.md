@@ -1,29 +1,31 @@
-#zookeeper [![Build Status](https://travis-ci.org/lutak-srce/zookeeper.svg)](https://travis-ci.org/lutak-srce/zookeeper)
+[![Build Status](https://travis-ci.org/lutak-srce/zookeeper.svg?branch=master)](https://travis-ci.org/lutak-srce/zookeeper)
 
-####Table of Contents
+# ZooKeeper
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with zookeeper](#setup)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-6. [Limitations - OS compatibility, etc.](#limitations)
-7. [Development - Guide for contributing to the module](#development)
+#### Table of Contents
 
-##Overview
+1. [Description](#description)
+2. [Setup](#setup)
+   * [Validating and unit testing the module](#validating-and-unit-testing-the-module)
+3. [Usage - Configuration options and additional functionality](#usage)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+5. [Limitations - OS compatibility, etc.](#limitations)
+6. [Development - Guide for contributing to the module](#development)
 
-The zookeeper module installs, configures, and manages the [ZooKeeper](https://zookeeper.apache.org/),
+## Description
+
+The Puppet zookeeper module installs, configures, and manages the [ZooKeeper](https://zookeeper.apache.org/),
 highy reliable distributed coordinator.
 
-##Module Description
+## Setup
 
-The zookeeper module handles installing, configuring, and running ZooKeeper across a range of operating systems and distributions.
+To install and start Apache ZooKeeper, add a single class to the manifest file:
 
-##Setup
+```puppet
+include 'zookeeper::server'
+```
 
-###Beginning with zookeeper
-
-`include '::zookeeper::server'` is enough to get you up and running.  If you wish to pass in parameters specifying which servers to use, then:
+To configure it with custom parameters specifying cluster members, add it to manifest like:
 
 ```puppet
 class { '::zookeeper::server':
@@ -31,20 +33,43 @@ class { '::zookeeper::server':
 }
 ```
 
-##Usage
+
+### Validating and unit testing the module
+
+This module is compliant with the Puppet Development Kit [(PDK)](https://puppet.com/docs/pdk/1.x/pdk.html), which
+ provides tools to help run unit tests on the module and validate the modules's metadata, syntax, and style.
+
+To run all validations against this module, run the following command:
+
+```
+pdk validate
+```
+
+To change validation behavior, add options flags to the command. For a complete list of command options and usage
+ information, see the PDK command [reference](https://puppet.com/docs/pdk/1.x/pdk_reference.html#pdk-validate-command).
+
+To unit test the module, run the following command:
+
+```
+pdk test unit
+```
+
+To change unit test behavior, add option flags to the command. For a complete list of command options and usage
+information, see the PDK command [reference](https://puppet.com/docs/pdk/1.x/pdk_reference.html#pdk-test-unit-command).
+
+## Usage
 
 All interaction with the zookeeper module can be done through the `zookeeper::server` class. This means you can simply toggle the options in `::zookeeper::server` to have full functionality of the module.
 
-##Reference
+## Reference
 
-##Limitations
+## Limitations
 
-This module has been tested on CentOS 6 and 7.
+This module has been tested on:
 
-##Development
+* CentOS 6
+* CentOS 7
+
+## Development
 
 Everybody is welcome to contribute. We adhere to [NCoC](CODE_OF_CONDUCT.md) and are not interested in politics but in meritocracy.
-
-###Contributors
-
-To see who's already involved, see the [list of contributors.](https://github.com/lutak-srce/zookeeper/graphs/contributors)
