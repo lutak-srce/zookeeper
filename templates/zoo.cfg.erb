@@ -1,13 +1,13 @@
 # http://hadoop.apache.org/zookeeper/docs/current/zookeeperAdmin.html
 
 # The number of milliseconds of each tick
-tickTime=2000
+tickTime=<%= @tick_time %>
 # The number of ticks that the initial
 # synchronization phase can take
-initLimit=10
+initLimit=<%= @init_limit %>
 # The number of ticks that can pass between
 # sending a request and getting an acknowledgement
-syncLimit=5
+syncLimit=<%= @sync_limit %>
 # the directory where the snapshot is stored.
 dataDir=<%= @datadir %>
 # Place the dataLogDir to a separate physical disc for better performance
@@ -36,7 +36,11 @@ server.<%= num %>=<%= node %>
 # blocks of preAllocSize kilobytes. The default block size is 64M. One reason
 # for changing the size of the blocks is to reduce the block size if snapshots
 # are taken more often. (Also, see snapCount).
+<% if @pre_alloc_size -%>
+preAllocSize=<%= @pre_alloc_size %>
+<% else -%>
 #preAllocSize=65536
+<% end -%>
 
 # Clients can submit requests faster than ZooKeeper can process them,
 # especially if there are a lot of clients. To prevent ZooKeeper from running
@@ -46,7 +50,11 @@ server.<%= num %>=<%= node %>
 # transaction log. After snapCount transactions are written to a log file a
 # snapshot is started and a new transaction log file is started. The default
 # snapCount is 10,000.
+<% if @snap_count -%>
+snapCount=<%= @snap_count %>
+<% else -%>
 #snapCount=1000
+<% end -%>
 
 # If this option is defined, requests will be will logged to a trace file named
 # traceFile.year.month.day.
@@ -56,7 +64,11 @@ server.<%= num %>=<%= node %>
 # coordinates updates. For higher update throughput at thes slight expense of
 # read throughput the leader can be configured to not accept clients and focus
 # on coordination.
+<% if @leader_serves -%>
+leaderServes=<%= @leader_serves %>
+<% else -%>
 #leaderServes=yes
+<% end -%>
 
 # Retains the number of most recent snapshots and the corresponding transaction
 # logs (default is 3)
@@ -72,4 +84,17 @@ autopurge.snapRetainCount = <%= @snap_retain_count %>
 autopurge.purgeInterval = <%= @purge_interval %>
 <% else -%>
 #autopurge.purgeInterval = 1
+<% end -%>
+<% if @max_client_cnxns -%>
+
+# Limits the number of concurrent connections (at the socket level) that a
+# single client, identified by IP address, may make to a single member of
+# the ZooKeeper ensemble. (default is 60, 0 disables limit)
+maxClientCnxns = <%= @max_client_cnxns %>
+<% end -%>
+<% if @max_session_timeout -%>
+
+# The maximum session timeout (ms) that the server will allow the client
+# to negotiate. (defaults to 20 times the tickTime)
+maxSessionTimeout=<%= @max_session_timeout %>
 <% end -%>

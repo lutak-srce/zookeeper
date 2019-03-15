@@ -16,8 +16,16 @@ class zookeeper::server (
   $confdir_altlink     = $::zookeeper::params::confdir_altlink,
   $datadir             = $::zookeeper::params::datadir,
   $datalogdir          = $::zookeeper::params::datalogdir,
+  $tick_time           = 2000,
+  $init_limit          = 10,
+  $sync_limit          = 5,
+  $pre_alloc_size      = undef,
+  $snap_count          = undef,
   $snap_retain_count   = undef,
   $purge_interval      = undef,
+  $max_client_cnxns    = undef,
+  $max_session_timeout = undef,
+  $leader_serves       = undef,
   $manage_alternatives = $::zookeeper::params::manage_alternatives,
   $template_zoocfg     = 'zookeeper/zoo.cfg.erb',
   $source_environment  = 'puppet:///modules/zookeeper/environment',
@@ -35,7 +43,7 @@ class zookeeper::server (
   validate_string($version)
   validate_string($service)
   validate_re($service_ensure, ['running','stopped',undef], 'Valid values are: running, stopped')
-  validate_re($service_enable, [true,false,undef], 'Valid values are: true, false')
+  validate_bool($service_enable)
 
   ### Internal variables (that map class parameters)
   if $ensure == 'present' {
