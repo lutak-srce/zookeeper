@@ -7,7 +7,7 @@ class zookeeper::server (
   $version             = $::zookeeper::params::server_version,
   $service             = $::zookeeper::params::service,
   $service_ensure      = 'running',
-  $service_enable      = 'true',
+  $service_enable      = true,
   $file_mode           = $::zookeeper::params::file_mode,
   $file_owner          = $::zookeeper::params::file_owner,
   $file_group          = $::zookeeper::params::file_group,
@@ -35,7 +35,7 @@ class zookeeper::server (
   validate_string($version)
   validate_string($service)
   validate_re($service_ensure, ['running','stopped',undef], 'Valid values are: running, stopped')
-  validate_re($service_enable, ['true','false',undef], 'Valid values are: true, false')
+  validate_re($service_enable, [true,false,undef], 'Valid values are: true, false')
 
   ### Internal variables (that map class parameters)
   if $ensure == 'present' {
