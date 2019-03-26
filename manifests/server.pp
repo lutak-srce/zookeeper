@@ -26,7 +26,7 @@ class zookeeper::server (
   $max_client_cnxns     = undef,
   $max_session_timeout  = undef,
   $leader_serves        = undef,
-  $java_opts            = undef,
+  $jvmflags             = undef,
   $manage_alternatives  = $::zookeeper::params::manage_alternatives,
   $template_zoocfg      = 'zookeeper/zoo.cfg.erb',
   $template_environment = 'zookeeper/environment.erb',
