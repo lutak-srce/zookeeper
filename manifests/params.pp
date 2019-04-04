@@ -1,61 +1,51 @@
+# @summary
+#   This class provides default values for params.
 #
-# Class: zookeeper::params
-#
-# This module contains defaults for other ZooKeeper modules
+# @api private
 #
 class zookeeper::params {
 
-  # global settings
-  $ensure     = 'present'
-
-  # global file properites
-  $file_owner = 'root'
-  $file_group = 'root'
-  $file_mode  = '0644'
-
-  # global module dependencies
-  $dependency_class = undef
-  $my_class         = undef
-
   # install package depending on major version
-  case $::osfamily {
+  case $facts['os']['family'] {
     default: {
     }
     /(RedHat|redhat|amazon)/: {
-      # zookeeper
-      $package              = 'zookeeper'
-      $version              = 'present'
-      $confdir              = '/etc/zookeeper/conf_active'
-      $confdir_altname      = 'zookeeper-conf'
-      $confdir_altlink      = '/etc/zookeeper/conf'
+      $package_name         = [ 'zookeeper' ]
+      $service_name         = 'zookeeper'
+      # don't manage alternatives on RHEL
+      $alternatives_manage  = false
+      $confdir              = '/etc/zookeeper'
+      $confdir_altname      = undef
+      $confdir_altlink      = undef
       $datadir              = '/var/lib/zookeeper'
-      $datalogdir           = '/var/lib/zookeeper/log'
-      $manage_alternatives  = true
-      # server package
-      $server_package       = 'zookeeper-server'
-      $server_version       = 'present'
-      $server_service       = 'zookeeper'
-      # cli package
-      $cli_package          = 'zookeeper-java'
-      $cli_version          = 'present'
+      $datadir_mode         = '0755'
+      $zoocfg_template      = 'zookeeper/zoo.cfg.erb'
+      if ( $facts['os']['name'] == 'Fedora' ) {
+        $zkenv_path     = '/etc/zookeeper/zookeeper-env.sh'
+        $zkenv_template = 'zookeeper/zkEnv.sh.fedora.erb'
+      } else {
+        if ( (0 + $facts['os']['release']['major']) > 6 ) {
+          $zkenv_path     = '/etc/sysconfig/zookeeper'
+          $zkenv_template = 'zookeeper/zkEnv.sh.el7.erb'
+        } else {
+          $zkenv_path     = '/etc/zookeeper/conf/environment'
+          $zkenv_template = 'zookeeper/zkEnv.sh.el6.erb'
+        }
+      }
     }
     /(Debian|debian|Ubuntu|ubuntu)/: {
-      # zookeeper
-      $package              = 'zookeeper'
-      $version              = 'present'
+      $package_name         = [ 'zookeeperd', 'zookeeper', 'zookeeper-bin' ]
+      $service_name         = 'zookeeper'
+      # manage config through alternatives on Debian
+      $alternatives_manage  = true
       $confdir              = '/etc/zookeeper/conf_active'
       $confdir_altname      = 'zookeeper-conf'
       $confdir_altlink      = '/etc/zookeeper/conf'
       $datadir              = '/var/lib/zookeeper'
-      $datalogdir           = '/var/log/zookeeper'
-      $manage_alternatives  = true
-      # server package
-      $server_package       = 'zookeeperd'
-      $server_version       = 'present'
-      $server_service       = 'zookeeper'
-      # cli package
-      $cli_package          = 'zookeeper-bin'
-      $cli_version          = 'present'
+      $datadir_mode         = '0750'
+      $zoocfg_template      = 'zookeeper/zoo.cfg.erb'
+      $zkenv_template       = 'zookeeper/zkEnv.sh.deb.erb'
+      $zkenv_path           = '/etc/zookeeper/conf/environment'
     }
   }
 }
