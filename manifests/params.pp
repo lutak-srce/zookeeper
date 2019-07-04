@@ -34,7 +34,7 @@ class zookeeper::params {
       }
     }
     /(Debian|debian|Ubuntu|ubuntu)/: {
-      $package_name         = [ 'zookeeperd', 'zookeeper', 'zookeeper-bin' ]
+      $package_name         = [ 'zookeeperd', 'zookeeper', 'libzookeeper-java' ]
       $service_name         = 'zookeeper'
       # manage config through alternatives on Debian
       $alternatives_manage  = true
