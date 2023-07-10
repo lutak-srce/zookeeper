@@ -1,4 +1,8 @@
 ZOOMAIN=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain
+<% if @logbk_source -%>
+LOGBK=-Dlogback.configurationFile=/etc/zookeeper/logback.xml
+<% else -%>
 LOG4J=-Dlog4j.configuration=file:///etc/zookeeper/log4j.properties
+<% end -%>
 JVMFLAGS="<%= @java_opts %>"
 ZOOCFG=/etc/zookeeper/zoo.cfg

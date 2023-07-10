@@ -40,6 +40,13 @@ class zookeeper::config inherits zookeeper {
     source => $zookeeper::log4j_source,
   }
 
+  if ( $logback_source ) {
+    file { '/etc/zookeeper/logback.xml':
+      path   => "${zookeeper::confdir}/logback.xml",
+      source => $zookeeper::logback_source,
+    }
+  }
+
   # myid
   file { '/etc/zookeeper/myid':
     path    => "${zookeeper::confdir}/myid",
