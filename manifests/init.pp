@@ -34,6 +34,7 @@ class zookeeper (
   $zkenv_template      = $::zookeeper::params::zkenv_template,
   $zkenv_path          = $::zookeeper::params::zkenv_path,
   $log4j_source        = 'puppet:///modules/zookeeper/log4j.properties',
+  $logbk_source        = undef,
   $template_myid       = 'zookeeper/myid.erb',
   $myid                = undef,
   $nodes               = [],
