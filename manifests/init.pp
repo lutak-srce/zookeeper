@@ -28,6 +28,7 @@ class zookeeper (
   $purge_interval      = undef,
   $max_client_cnxns    = undef,
   $max_session_timeout = undef,
+  $admin_enable_server = undef,
   $leader_serves       = undef,
   $java_opts           = undef,
   $zoocfg_template     = $::zookeeper::params::zoocfg_template,

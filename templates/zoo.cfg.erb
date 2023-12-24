@@ -102,3 +102,9 @@ maxClientCnxns = <%= @max_client_cnxns %>
 # to negotiate. (defaults to 20 times the tickTime)
 maxSessionTimeout=<%= @max_session_timeout %>
 <% end -%>
+<% if @admin_enable_server -%>
+
+# Set to "false" to disable the AdminServer. By default the AdminServer is
+# enabled.
+admin.enableServer=<%= @admin_enable_server %>
+<% end -%>
