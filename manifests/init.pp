@@ -19,6 +19,7 @@ class zookeeper (
   $datadir             = $::zookeeper::params::datadir,
   $datadir_mode        = $::zookeeper::params::datadir_mode,
   $datalogdir          = undef,
+  $ssl                 = {},
   $tick_time           = 2000,
   $init_limit          = 10,
   $sync_limit          = 5,

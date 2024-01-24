@@ -19,6 +19,24 @@ dataLogDir=<%= @datalogdir %>
 
 # the port at which the clients will connect
 clientPort=2181
+<% if @ssl != {} -%>
+
+# SSL encryption
+sslQuorum=true
+serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
+ssl.keyStore.location=<%= @ssl['keystore']['location'] %>
+ssl.keyStore.password=<%= @ssl['keystore']['password'] %>
+ssl.trustStore.location=<%= @ssl['truststore']['location'] %>
+ssl.trustStore.password=<%= @ssl['truststore']['password'] %>
+ssl.quorum.keyStore.location=<%= @ssl['quorum']['keystore']['location'] %>
+ssl.quorum.keyStore.password=<%= @ssl['quorum']['keystore']['location'] %>
+ssl.quorum.trustStore.location=<%= @ssl['quorum']['truststore']['location'] %>
+ssl.quorum.trustStore.password=<%= @ssl['quorum']['truststore']['location'] %>
+ssl.quorum.protocol=TLS
+ssl.quorum.enabledProtocols=TLSv1.2
+# MapR uses the cluster name in the certificates, no host names
+ssl.quorum.hostnameVerification=false
+<% end -%>
 
 # specify all zookeeper servers
 # The fist port is used by followers to connect to the leader

@@ -33,6 +33,24 @@ class { '::zookeeper::server':
 }
 ```
 
+### TLS setup
+
+```
+zookeeper::ssl:
+  keystore:
+    location: '/path/to/keystore'
+    password: 'keystore_pass'
+  truststore:
+    location: '/path/to/truststore'
+    password: 'truststore_pass'
+  quorum:
+    keystore:
+      location: '/path/to/keystore'
+      password: 'keystore_pass'
+    truststore:
+      location: '/path/to/truststore'
+      password: 'truststore_pass'
+```
 
 ### Validating and unit testing the module
 
