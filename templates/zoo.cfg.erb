@@ -96,6 +96,15 @@ autopurge.purgeInterval = <%= @purge_interval %>
 # the ZooKeeper ensemble. (default is 60, 0 disables limit)
 maxClientCnxns = <%= @max_client_cnxns %>
 <% end -%>
+<% if @global_outstanding_limit -%>
+
+# Clients can submit requests faster than ZooKeeper can process them,
+# especially if there are a lot of clients. To prevent ZooKeeper from running
+# out of memory due to queued requests, ZooKeeper will throttle clients so
+# that there is no more than globalOutstandingLimit outstanding requests in the
+# system. The default limit is 1000.
+globalOutstandingLimit = <%= @global_outstanding_limit %>
+<% end -%>
 <% if @max_session_timeout -%>
 
 # The maximum session timeout (ms) that the server will allow the client
