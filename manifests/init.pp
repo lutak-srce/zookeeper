@@ -42,28 +42,6 @@ class zookeeper (
   $nodes                    = [],
 ) inherits zookeeper::params {
 
-  ### Input parameters validation
-  validate_string($package_ensure)
-  validate_bool($package_manage)
-  validate_array($package_name)
-  validate_bool($service_enable)
-  validate_re($service_ensure, ['running','stopped',undef], 'Valid values are: running, stopped')
-  validate_bool($service_manage)
-  validate_string($service_name)
-  validate_string($service_provider)
-  validate_bool($service_hasstatus)
-  validate_bool($service_hasrestart)
-  validate_absolute_path($confdir)
-  validate_bool($alternatives_manage)
-  if ( $alternatives_manage ) {
-    validate_string($confdir_altname)
-    validate_absolute_path($confdir_altlink)
-  }
-
-  validate_numeric($tick_time)
-  validate_numeric($init_limit)
-  validate_numeric($sync_limit)
-
   ### Install and deploy
   include zookeeper::install
   include zookeeper::config
